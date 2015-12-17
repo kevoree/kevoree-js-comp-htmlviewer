@@ -1,0 +1,18 @@
+add node0, browser : JavascriptNode
+add sync : WSGroup
+// and we add your component to the Browser node so that you can test your UI
+add browser.htmlViewer : HTMLViewer
+add browser.sender: MsgSender
+
+attach node0, browser sync
+
+set sync.master = 'node0'
+
+network node0.ip.lo 127.0.0.1
+
+set browser.logLevel = 'DEBUG'
+
+add chan: LocalChannel
+
+bind browser.htmlViewer.in chan
+bind browser.sender.send chan
